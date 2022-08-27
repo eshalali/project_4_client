@@ -12,6 +12,12 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import JournalIndex from './components/journal/JournalIndex'
+import NewJournal from './components/journal/NewJournal'
+import ShowJournal from './components/journal/ShowJournal'
+import Calendar from './components/calendar/CalendarIndex'
+import TodoIndex from './components/todo/ToDoIndex'
+import CreateToDo from './components/todo/NewToDo'
 
 const App = () => {
 
@@ -39,6 +45,7 @@ const App = () => {
       )
 		})
 	}
+	
 
 		return (
 			<Fragment>
@@ -68,7 +75,54 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 					/>
-					
+					<Route
+						path='/journal'
+						element={
+							<RequireAuth user={user}>
+								<JournalIndex msgAlert={msgAlert} user={user} />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/journal/:id"
+						element={
+							<RequireAuth user={user}>
+								<ShowJournal user={ user } msgAlert={ msgAlert } />
+							</RequireAuth>
+							}
+					/>
+					<Route
+						path="/journal/create"
+						element={
+							<RequireAuth user={user}>
+								<NewJournal msgAlert={msgAlert} user={user}/>
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/calendar"
+						element={
+							<RequireAuth user={user}>
+								<Calendar/>
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/todo"
+						element={
+							<RequireAuth user={user}>
+								<TodoIndex user={user} msgAlert={msgAlert}/>
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/todo/create"
+						element={
+							<RequireAuth user={user}>
+								<CreateToDo user={user} msgAlert={msgAlert}/>
+							</RequireAuth>
+						}
+					/>
 				</Routes>
 				{msgAlerts.map((msgAlert) => (
 					<AutoDismissAlert
