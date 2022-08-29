@@ -51,7 +51,7 @@ const JournalIndex = (props) => {
             <Card.Header>{ journal.title }</Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <Link to={`/journal/${journal._id}`}>View </Link>
+                    <Link to={`/journal/${journal._id}`}>View Entry</Link>
                 </Card.Text>
             </Card.Body>
         </Card>
@@ -60,7 +60,7 @@ const JournalIndex = (props) => {
     return (
         <>
         <div>
-            <a href='/journal/create'>Add entry</a>
+            <Link to={'/journal/create'}>Add entry</Link>
         </div>
         <div style={ cardContainerStyle }>
             { journalCards }

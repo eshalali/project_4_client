@@ -34,7 +34,7 @@ const CreateJournal = (props) => {
             }
         })
     }
-
+    console.log('this is finished journal', journal)
     // We'll add a handleSubmit here that makes an api request, then handles the response
     const handleSubmit = (e) => {
         // e equals the event
@@ -42,7 +42,7 @@ const CreateJournal = (props) => {
 
         createJournal(user, journal)
             // if we're successful, navigate to the show page 
-            .then(res => { navigate(`/journal/${res.data.journal._id}`)})
+            .then(res => { navigate(`/journal`)})
             // send a success message to the user
             .then(() => {
                 msgAlert({

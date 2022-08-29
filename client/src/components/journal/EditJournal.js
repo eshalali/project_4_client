@@ -1,42 +1,35 @@
 import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from '@chakra-ui/react'
 import JournalForm from '../shared/JournalForm'
 
-const EditJournal= (props) => {
-    const { 
-        user, show, handleClose, 
-        updatePet, msgAlert, triggerRefresh
-    } = props
+const EditJournal = (props) => {
+    const { user, show, handleClose, updateJournal, msgAlert, triggerRefresh } = props
 
-    const [pet, setPet] = useState(props.pet)
+    const [journal, setJournal] = useState(props.journal)
 
-    console.log('pet in edit modal', pet)
+    console.log('journal in edit', journal)
 
     const handleChange = (e) => {
-        setPet(prevPet => {
+        setJournal(prevJournal => {
             let updatedValue = e.target.value
             const updatedName = e.target.name
 
             console.log('this is the input type', e.target.type)
 
-            if (e.target.type === 'number') {
-                // this is looking at the input type, and changing it from the default, which is a string, into an actual number
-                updatedValue = parseInt(e.target.value)
-            }
-
-            // this handles the checkbox, changing on to true etc
-            if (updatedName === "adoptable" && e.target.checked) {
-                updatedValue = true
-            } else if (updatedName === "adoptable" && !e.target.checked) {
-                updatedValue = false
-            }
-
-            const updatedPet = {
+            const updatedJournal = {
                 [updatedName]: updatedValue
             }
             return {
-                ...prevPet,
-                ...updatedPet
+                ...prevJournal,
+                ...updatedJournal
             }
         })
     }
@@ -45,27 +38,23 @@ const EditJournal= (props) => {
         // e equals the event
         e.preventDefault()
 
-        updatePet(user, pet)
+        updateJournal(user, journal)
             // if we're successful in the modal, we want the modal to close
             .then(() => handleClose())
             // send a success message to the user
             .then(() => {
                 msgAlert({
-                    heading: 'Oh Yeah!',
-                    message: updatePetSuccess,
+                    heading: 'Success',
+                    message: 'Journal updated',
                     variant: 'success'
                 })
             })
-            // if everything is successful, we need to trigger our refresh for the show page
-            // this is that setUpdated function in showPet component
-            // updated is in ShowPet's useEffect's dependency array
-            // changes to the updated boolean cause ShowPet's useEffect to run again.
             .then(() => triggerRefresh())
             // if there is an error, tell the user about it
             .catch(() => 
                 msgAlert({
-                    heading: 'Oh No!',
-                    message: updatePetFailure,
+                    heading: 'Failure',
+                    message: 'Could not update journal',
                     variant: 'danger'
                 })
             )
@@ -75,11 +64,11 @@ const EditJournal= (props) => {
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton />
             <Modal.Body>
-                <PetForm 
-                    pet={pet}
+                <JournalForm 
+                    journal={journal}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    heading="Update Pet"
+                    heading="Update Journal"
                 />
             </Modal.Body>
         </Modal>

@@ -14,6 +14,15 @@ const cardContainerStyle = {
 const TodoIndex = (props) => {
     const [todos, setToDos] = useState(null)
     const [error, setError] = useState(false)
+    const [value, setValue] = useState([1, 3]);
+
+  /*
+   * The second argument that will be passed to
+   * `handleChange` from `ToggleButtonGroup`
+   * is the SyntheticEvent object, but we are
+   * not using it in this example so we will omit it.
+   */
+  const handleChange = (val) => setValue(val);
 
     const { msgAlert } = props
 
@@ -43,18 +52,19 @@ const TodoIndex = (props) => {
     } else if (todos.length === 0) {
         return (<>
                  <p>No items yet.</p>
-                 <a href='/todo/create'> Add an item</a>
+                 <Link to={'/todo/create'}>Create a New Item</Link>
                 </>
             )
     }
 
     const todoCards = todos.map(todo => (
         <Card style={{ width: '30%', margin: 5}} key={ todo.id }>
-            <Card.Header>{ todo.item }</Card.Header>
+            <Card.Header>{ todo.date }</Card.Header>
             <Card.Body>
-                <Card.Text>
-                    <Link to={`/todo/${todo.id}`}>View </Link>
-                </Card.Text>
+                {todo.item}
+                <div>
+                    <input type="checkbox" />
+                </div>
             </Card.Body>
         </Card>
     ))
@@ -64,7 +74,7 @@ const TodoIndex = (props) => {
         <div style={ cardContainerStyle }>
             { todoCards }
         </div>
-        <a href='/todo/create'>Create a New Item</a>
+        <Link to={'/todo/create'}>Create a New Item</Link>
         </>
     )
 }

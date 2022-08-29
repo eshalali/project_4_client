@@ -13,7 +13,7 @@ const CreateToDo = (props) => {
         item: '',
         date: ''
     })
-
+    console.log('this is the user', user)
     console.log('this is todo in createToDo', todo)
 
     const handleChange = (e) => {
@@ -38,7 +38,7 @@ const CreateToDo = (props) => {
 
         createTodo(user, todo)
             // if we're successful, navigate to the show page 
-            .then(res => { navigate(`/todo/${res.data.todo.id}`)})
+            .then(res => { navigate(`/todo`)})
             // send a success message to the user
             .then(() => {
                 msgAlert({

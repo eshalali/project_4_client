@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap'
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalCloseButton,
+    Button,
+  } from '@chakra-ui/react'
+  import { useDisclosure } from '@chakra-ui/react'
 import EventForm from '../shared/EventForm'
 // import { createToy } from '../../api/toys'
 
@@ -31,6 +40,29 @@ const NewEventModal = (props) => {
         triggerRefresh()
         console.log('events in add events', events)
     }
+    const BasicUsage = () => {
+        const { isOpen, onOpen, onClose } = useDisclosure()
+        return (
+          <>
+            <Button onClick={onOpen}>Add event</Button>
+      
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Modal Title</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    <EventForm 
+                        handleChange={handleChange}
+                        handleSubmit={handleSubmit}
+                        heading="New Event"
+                    />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+          </>
+        )
+      }
 
     return (
         <Modal show={show} onHide={handleClose}>

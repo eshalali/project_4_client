@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 // useParams will allow us to see our parameters
 // useNavigate will allow us to navigate to a specific page
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { Container, Card, Button } from 'react-bootstrap'
 
 
@@ -15,20 +15,24 @@ const ShowJournal = (props) => {
     // useNavigate returns a function
     // we can call that function to redirect the user wherever we want to
     const navigate = useNavigate()
+    const { user, msgAlert } = props
+    console.log('user in props', user)
+    console.log('this is id', id)
 
     useEffect(() => {
         getOneJournal(id)
-            .then(res => setJournal(res.data.journal))
+        .then(res => setJournal(res.data.journalentry))
             .catch(err => {                   
-                // msgAlert({
-                //     heading: 'Error',
-                //     message: 'Could not get journal entry',
-                //     variant: 'danger'
-                // })
-                navigate('/journal')
+                msgAlert({
+                    heading: 'Error',
+                    message: 'Could not get journal',
+                    variant: 'danger'
+                })
+                navigate('/')
+                //navigate back to the home page if there's an error fetching
             })
     }, [updated])
-
+    console.log('the journal in showjournal', journal)
     // function for delete journal button
     const deleteJournal = () => {
         removeJournal(journal.owner, journal._id)
@@ -56,7 +60,7 @@ const ShowJournal = (props) => {
         return (
             <>
             <h1>Could not get journal</h1> 
-            <a href='/journal'>Back to all entries</a>
+            <Link to={'/journal'}>Back to all entries</Link>
             </>
             )
     }
@@ -83,24 +87,24 @@ const ShowJournal = (props) => {
                     </Card.Body>
                     <Card.Footer>
                         {
-                            // pet.owner && user && pet.owner._id === user._id 
-                            // ?
-                            // <>
-                            //     <Button onClick={() => setEditModalShow(true)} 
-                            //         className="m-2" 
-                            //         variant="warning"
-                            //     >
-                            //         Edit Pet
-                            //     </Button>
+                            journal.owner && user && journal.owner._id === user._id 
+                            ?
+                            <>
+                                <Button
+                                    className="m-2" 
+                                    variant="warning"
+                                >
+                                    <Link to={`/journal/${journal._id}/edit`}>Edit Journal</Link>
+                                </Button>
                                 <Button onClick={() => deleteJournal()}
                                     className="m-2"
                                     variant="danger"
                                 >
                                     Delete entry
                                 </Button>
-                            // </>
-                            // :
-                            // null
+                            </>
+                            :
+                            null
                         }
                     </Card.Footer>
                 </Card>

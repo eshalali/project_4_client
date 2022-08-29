@@ -1,4 +1,4 @@
-import { Form,Button,Container } from 'react-bootstrap'
+import {  FormLabel, FormControl, Button, Container } from '@chakra-ui/react'
 
 const JournalForm = (props) => {
 
@@ -7,31 +7,38 @@ const JournalForm = (props) => {
     return (
         <Container className="justify-content-center">
             <h3>{heading}</h3>
-            <Form onSubmit={handleSubmit}>
-                <Form.Label htmlFor="title">Title</Form.Label>
-                <Form.Control
-                    placeholder="Journal title"
-                    name="title"
+            <form onSubmit={handleSubmit}>
+            <FormControl>
+                <FormLabel htmlFor="title" textAlign={"center"} fontSize="lg">
+                    Title
+                </FormLabel>
+                <Input 
                     id="title"
-                    value={ journal.title }
-                    onChange={ handleChange }
-                />
-                <Form.Label htmlFor="date">Date</Form.Label>
-                <Form.Control
+                    name="title"
+                    type="text"
+                    onChange={(e) => setTitle(e.target.value)}
+                    defaultValue={type === "edit" ? `${post.title}` : ""}
+                    required>
+                    
+
+                </Input>
+            </FormControl>
+                <FormLabel htmlFor="date">Date</FormLabel>
+                <FormControl
                     name="date"
                     id="date"
                     value={ journal.date }
                     onChange={ handleChange }
                 />
-                <Form.Label htmlFor="entry">Entry</Form.Label>
-                <Form.Control
+                <FormLabel htmlFor="entry">Entry</FormLabel>
+                <FormControl
                     name="entry"
                     id="entry"
                     value={ journal.entry }
                     onChange={ handleChange }
                 />
                 <Button type="submit">Submit</Button>
-            </Form>
+            </form>
         </Container>
     )
 }

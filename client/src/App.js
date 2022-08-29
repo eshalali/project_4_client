@@ -18,6 +18,7 @@ import ShowJournal from './components/journal/ShowJournal'
 import Calendar from './components/calendar/CalendarIndex'
 import TodoIndex from './components/todo/ToDoIndex'
 import CreateToDo from './components/todo/NewToDo'
+import EditJournal from './components/journal/EditJournal'
 
 const App = () => {
 
@@ -86,8 +87,14 @@ const App = () => {
 					<Route
 						path="/journal/:id"
 						element={
+								<ShowJournal msgAlert={ msgAlert } user={ user }/>
+							}
+					/>
+					<Route
+						path="/journal/:id/edit"
+						element={
 							<RequireAuth user={user}>
-								<ShowJournal user={ user } msgAlert={ msgAlert } />
+								<EditJournal user={ user } msgAlert={ msgAlert } />
 							</RequireAuth>
 							}
 					/>
@@ -110,9 +117,7 @@ const App = () => {
 					<Route
 						path="/todo"
 						element={
-							<RequireAuth user={user}>
-								<TodoIndex user={user} msgAlert={msgAlert}/>
-							</RequireAuth>
+							<TodoIndex user={user} msgAlert={msgAlert}/>
 						}
 					/>
 					<Route
