@@ -11,8 +11,8 @@ const Calendar = () => {
     const [eventModalShow, setEventModalShow] = useState(false)
     const [updated, setUpdated] = useState(false)
 
-    const [events, setEvents] = useState([]) 
-    // const events  = [{title: 'Meeting', date: '2022-08-29'}] 
+    // const [events, setEvents] = useState([]) 
+    const events  = [{title: 'Meeting', date: '2022-08-29'}, {title: 'Doctor', date: '2022-08-25'}] 
 
     useEffect(() => {
     }, [updated])
@@ -38,7 +38,7 @@ const Calendar = () => {
                 />
                 <NewEventModal 
                 events={events}
-                setEvents = {setEvents}
+                // setEvents = {setEvents}
                 show={eventModalShow}
                 // user={user}
                 // msgAlert={msgAlert}

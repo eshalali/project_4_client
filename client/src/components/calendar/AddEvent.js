@@ -15,7 +15,7 @@ import EventForm from '../shared/EventForm'
 // import { createToy } from '../../api/toys'
 
 const NewEventModal = (props) => {
-    const { events, setEvents, user,  show, handleClose, triggerRefresh} = props
+    const { events, user,  show, handleClose, triggerRefresh} = props
 
     const [event, setEvent] = useState({})
 
@@ -40,7 +40,7 @@ const NewEventModal = (props) => {
         e.preventDefault()
 
         events.push(event)
-        setEvents(events)
+        // setEvents(events)
         handleClose()
         console.log('events in add events', events)
         triggerRefresh()

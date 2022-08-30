@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import LoadingScreen from '../shared/LoadingScreen'
 import { getAllTodos } from '../../api/todo'
+import { Button } from 'react-bootstrap'
 // style for our card container
 const cardContainerStyle = {
     display: 'flex',
@@ -41,6 +42,28 @@ const TodoIndex = (props) => {
                 setError(true)
             })
     }, [])
+
+    // const deleteTodo = () => {
+    //     removeTodo(todo.owner, todo._id)
+    //         // on success send a success message
+    //         .then(() => {
+    //             // msgAlert({
+    //             //     heading: 'Success',
+    //             //     message: 'Deleted journal',
+    //             //     variant: 'success'
+    //             // })
+    //         })
+    //         // then navigate to journal index
+    //         .then(() => {navigate('/todo')})
+    //         // on failure send a failure message
+    //         .catch(err => {                   
+    //             // msgAlert({
+    //             //     heading: 'Error',
+    //             //     message: 'Could not delete journal',
+    //             //     variant: 'danger'
+    //             // })
+    //         })
+    // }
 
     if (error) {
         return <p>Error!</p>
