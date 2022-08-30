@@ -46,17 +46,17 @@ const CreateJournal = (props) => {
             // send a success message to the user
             .then(() => {
                 msgAlert({
-                    heading: 'Journal created!',
-                    message: 'Success',
-                    variant: 'success'
+                    heading: 'Success',
+                    message: 'Journal created',
+                    variant: 'info'
                 })
             })
             // if there is an error, tell the user about it
             .catch(() => 
                 msgAlert({
-                    heading: 'Oh No!',
-                    message: 'failure',
-                    variant: 'danger'
+                    heading: 'Failure',
+                    message: 'Could not create journal',
+                    variant: 'secondary'
                 })
             )
     }

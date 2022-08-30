@@ -15,20 +15,20 @@ const EventForm = (props) => {
                     id="title"
                     onChange={ handleChange }
                 />
-                <Form.Label htmlFor="startdate">Start Date</Form.Label>
+                <Form.Label htmlFor="date">Start Date</Form.Label>
                 <Form.Control
                     placeholder="Start date"
-                    name="startdate"
-                    id="startdate"
+                    name="date"
+                    id="date"
                     onChange={ handleChange }
                 />
-                <Form.Label htmlFor="enddate">End Date</Form.Label>
+                {/* <Form.Label htmlFor="end">End Date</Form.Label>
                 <Form.Control
                     placeholder="End date"
-                    name="enddate"
-                    id="enddate"
+                    name="end"
+                    id="end"
                     onChange={ handleChange }
-                />
+                /> */}
                 <Button type="submit">Submit</Button>
             </Form>
         </Container>

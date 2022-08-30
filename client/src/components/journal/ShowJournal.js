@@ -6,10 +6,12 @@ import { Container, Card, Button } from 'react-bootstrap'
 
 
 import { getOneJournal, updateJournal, removeJournal } from '../../api/journal'
+import EditJournalModal from './EditJournal'
 
 const ShowJournal = (props) => {
     const [journal, setJournal] = useState(null)
     const [updated, setUpdated] = useState(false)
+    const [editModalShow, setEditModalShow] = useState(false)
 
     const { id } = useParams()
     // useNavigate returns a function
@@ -90,11 +92,11 @@ const ShowJournal = (props) => {
                             journal.owner && user && journal.owner._id === user._id 
                             ?
                             <>
-                                <Button
+                                <Button onClick={() => setEditModalShow(true)} 
                                     className="m-2" 
                                     variant="warning"
                                 >
-                                    <Link to={`/journal/${journal._id}/edit`}>Edit Journal</Link>
+                                    Edit Journal
                                 </Button>
                                 <Button onClick={() => deleteJournal()}
                                     className="m-2"
@@ -109,6 +111,15 @@ const ShowJournal = (props) => {
                     </Card.Footer>
                 </Card>
             </Container>
+            <EditJournalModal 
+                user={user}
+                journal = {journal} 
+                show={editModalShow} 
+                updateJournal={updateJournal}
+                msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+                handleClose={() => setEditModalShow(false)} 
+            />
         </>
     )
 

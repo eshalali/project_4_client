@@ -34,9 +34,9 @@ const TodoIndex = (props) => {
             .then(res => setToDos(res.data.todo))
             .catch(err => {
                 msgAlert({
-                    heading: 'Error Getting ToDos',
+                    heading: 'Error',
                     message: 'Could not get todos',
-                    variant: 'danger',
+                    variant: 'secondary',
                 })
                 setError(true)
             })

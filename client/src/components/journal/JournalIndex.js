@@ -27,9 +27,9 @@ const JournalIndex = (props) => {
             .then(res => setJournals(res.data.journal))
             .catch(err => {
                 msgAlert({
-                    heading: 'Error Getting Journals',
+                    heading: 'Error',
                     message: 'Could not get journals',
-                    variant: 'danger',
+                    variant: 'secondary',
                 })
                 setError(true)
             })
